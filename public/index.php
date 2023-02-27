@@ -23,6 +23,18 @@ if (isset($_GET["consultar"])) {
     }
 }
 
+//Listar clientes Baja
+if (isset($_GET["consultarBaja"])) {
+    $sqlClientes = mysqli_query($conexionBD, "SELECT * FROM clientes WHERE estado= 'baja'");
+    if (mysqli_num_rows($sqlClientes) > 0) {
+        $clientes = mysqli_fetch_all($sqlClientes, MYSQLI_ASSOC);
+        echo json_encode($clientes);
+    } else {
+        echo json_encode([["success" => 0]]);
+    }
+}
+
+
 //Listar polizas de cliente
 if (isset($_GET["consultarPolizas"])) {
     $id = $_GET["consultarPolizas"];
@@ -50,6 +62,17 @@ if (isset($_GET["consultarPoliza"])) {
 //Listar polizas
 if (isset($_GET["listaPolizas"])) {
     $sqlPolizas = mysqli_query($conexionBD, "SELECT * FROM polizas WHERE estadoPoliza= 'alta'");
+    if (mysqli_num_rows($sqlPolizas) > 0) {
+        $polizas = mysqli_fetch_all($sqlPolizas, MYSQLI_ASSOC);
+        echo json_encode($polizas);
+    } else {
+        echo json_encode([["success" => 0]]);
+    }
+}
+
+//Listar polizas Baja
+if (isset($_GET["listaPolizasBaja"])) {
+    $sqlPolizas = mysqli_query($conexionBD, "SELECT * FROM polizas WHERE estadoPoliza= 'baja'");
     if (mysqli_num_rows($sqlPolizas) > 0) {
         $polizas = mysqli_fetch_all($sqlPolizas, MYSQLI_ASSOC);
         echo json_encode($polizas);
@@ -132,9 +155,31 @@ if (isset($_GET["borrar"])) {
     }
 }
 
+//altaClientes
+if (isset($_GET["alta"])) {
+    $sqlClientes = mysqli_query($conexionBD, "UPDATE clientes SET estado='alta' WHERE id=" . $_GET["alta"]);
+    if ($sqlClientes) {
+        echo json_encode(["success" => 1]);
+        exit();
+    } else {
+        echo json_encode(["success" => 0]);
+    }
+}
+
 //borrarPoliza
 if (isset($_GET["borrarPoliza"])) {
     $sqlPolizas = mysqli_query($conexionBD, "UPDATE polizas SET estadoPoliza='baja' WHERE id=" . $_GET["borrarPoliza"]);
+    if ($sqlPolizas) {
+        echo json_encode(["success" => 1]);
+        exit();
+    } else {
+        echo json_encode(["success" => 0]);
+    }
+}
+
+//altaPoliza
+if (isset($_GET["altaPoliza"])) {
+    $sqlPolizas = mysqli_query($conexionBD, "UPDATE polizas SET estadoPoliza='alta' WHERE id=" . $_GET["altaPoliza"]);
     if ($sqlPolizas) {
         echo json_encode(["success" => 1]);
         exit();

@@ -2,20 +2,30 @@
   <div class="contact">
     <h2 class="text-center">Listado de Polizas</h2>
 
-    <div class="d-flex justify-content-center">
-      <div class="col-md-4">
-        <label for="filtro" class="form-label">Filtrado de Polizas</label>
-        <select class="form-select" v-model="filtroEstado">
-          <option value="">Todos</option>
-          <option value="cobrada">Cobrada</option>
-          <option value="a cuenta">A cuenta</option>
-          <option value="liquidada">Liquidada</option>
-          <option value="anulada">Anulada</option>
-          <option value="pre-anulada">Pre-anulada</option>
-        </select>
+    <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filtroCollapse"
+      aria-expanded="false" aria-controls="filtroCollapse">
+      Filtrar Polizas
+    </button> -->
+
+    <router-link :to="{ name: 'FiltradoPolizas' }"  class="btn btn-primary">Filtrar Polizas</router-link>
+
+    <div id="filtroCollapse" class="collapse">
+      <div class="d-flex justify-content-center">
+        <div class="col-md-4">
+          <label for="filtro" class="form-label">Filtrado de Polizas</label>
+          <select class="form-select" v-model="filtroEstado">
+            <option value="">Todos</option>
+            <option value="cobrada">Cobrada</option>
+            <option value="a cuenta">A cuenta</option>
+            <option value="liquidada">Liquidada</option>
+            <option value="anulada">Anulada</option>
+            <option value="pre-anulada">Pre-anulada</option>
+          </select>
+        </div>
       </div>
     </div>
-<br>
+
+    <br>
     <div class="card">
       <div class="card-header">Lista Polizas</div>
       <div class="card-body d-flex justify-content-center">
@@ -33,7 +43,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="poliza in polizasFiltradas" :key="poliza.id" :class="{
+            <tr v-for="poliza in polizas" :key="poliza.id" :class="{
               'bg-warning': poliza.estado === 'liquidada',
               'bg-danger': poliza.estado === 'anulada',
               'bg-info': poliza.estado === 'a_cuenta',
@@ -119,22 +129,22 @@ export default {
     return {
       selecPoliza: [],
       polizas: [],
-      filtroEstado: "",
+      // filtroEstado: "",
     };
   },
 
   created: function () {
     this.consultarPolizas();
   },
-  computed: {
-    polizasFiltradas() {
-      if (this.filtroEstado === '') {
-        return this.polizas;
-      } else {
-        return this.polizas.filter((poliza) => poliza.estado === this.filtroEstado);
-      }
-    }
-  },
+  // computed: {
+  //   polizasFiltradas() {
+  //     if (this.filtroEstado === '') {
+  //       return this.polizas;
+  //     } else {
+  //       return this.polizas.filter((poliza) => poliza.estado === this.filtroEstado);
+  //     }
+  //   }
+  // },
 
   methods: {
     almacenarPoliza(poliza) {

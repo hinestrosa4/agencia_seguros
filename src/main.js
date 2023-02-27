@@ -7,12 +7,15 @@ import 'datatables.net-bs5/js/dataTables.bootstrap5.js'
 import 'datatables.net/js/jquery.dataTables.js'
 import LoginView from './components/LoginView.vue'
 import ListarClientes from './components/ListarClientes.vue'
+import ListarClientesBaja from './components/ClientesBaja.vue'
 import ListarPolizas from './components/ListarPolizas.vue'
+import ListarPolizasBaja from './components/PolizasBaja.vue'
 import CrearCliente from './components/CrearCliente.vue'
 import DetallesCliente from './components/DetallesCliente.vue'
 import CrearPoliza from './components/CrearPoliza.vue'
 import EditarPoliza from './components/EditarPoliza.vue'
 import EditarCliente from './components/EditarCliente.vue'
+import FiltradoPolizas from './components/FiltradoPolizas.vue'
 
 Vue.use(VueRouter)
 
@@ -33,9 +36,21 @@ const router = new VueRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/listarBaja',
+      name: 'listarBaja',
+      component: ListarClientesBaja,
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/listarPolizas',
       name: 'listarPolizas',
       component: ListarPolizas,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/listarPolizasBaja',
+      name: 'listarPolizasBaja',
+      component: ListarPolizasBaja,
       meta: { requiresAuth: true }
     },
     {
@@ -66,6 +81,12 @@ const router = new VueRouter({
       path: '/editarCliente',
       name: 'editarCliente',
       component: EditarCliente,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/filtradoPolizas',
+      name: 'FiltradoPolizas',
+      component: FiltradoPolizas,
       meta: { requiresAuth: true }
     },
   ]

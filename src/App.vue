@@ -3,7 +3,9 @@
     <nav v-if="loginSuccess && $route.path !== '/'">
       <img src="images/logo.png" width="300px" alt=""> <br><br>
       <router-link to="/listar">Listar Clientes</router-link> |
+      <router-link to="/listarBaja">Listar Clientes Baja</router-link> |
       <router-link to="/listarPolizas">Listar Polizas</router-link> |
+      <router-link to="/listarPolizasBaja">Listar Polizas Baja</router-link> |
       <router-link to="/crear">Crear Cliente</router-link> |
       <router-link to="/crearPoliza">Crear Poliza</router-link> |
       <a @click="logout"><img src="images/logout.png" width="30px" alt=""></a>
@@ -14,8 +16,6 @@
     </div>
   </div>
 </template>
-
-
 
 <script>
 export default {
